@@ -1,14 +1,14 @@
 import fs from 'fs';
 import logger from '../log';
 
-interface Inventory {
+export interface Inventory {
 
   owner: string;
   car_id: number;
   make: string;
   model: string;
   price: number;
-  stock: number;
+  stock?: number;
 }
 
 

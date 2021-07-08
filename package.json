@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "tsc & node ./build/index.js",
+    "setup": "tsc & node ./build/setup/createTable.js",
     "build": "tsc",
     "test": "jest",
     "cov": "jest --coverage"
@@ -15,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.941.0",
     "dotenv": "^10.0.0",
     "log4js": "^6.3.0"
   },
