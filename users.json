@@ -1,0 +1,29 @@
+[
+  {"name": "Cindy",
+  "password": "pass",
+  "role": "Customer",
+  "money": 8000
+},
+{
+  "name": "David",
+  "password": "pass",
+  "role": "Customer",
+  "money": 8000
+},
+{
+  "name": "Jung",
+  "password": "pass",
+  "role": "Employee"
+},
+{
+  "name": "Michael",
+  "password": "pass",
+  "role": "Employee"
+},
+{
+  "name": "Abigail",
+  "password": "pass",
+  "role": "Customer",
+  "money": 8000
+}
+]
