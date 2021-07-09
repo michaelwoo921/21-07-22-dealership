@@ -16,7 +16,7 @@ export function itemString(item: Inventory){
   return item.car_id +'. ' + item.make + ' ' + item.model + '-$' + item.price;
 }
 
-export function displayContents(owner:string){
+export function displayContents(owner:string, callback: Function){
   logger.trace('displayContents called!');
   inventoryService.getItemsForDisplay().then(items => {
     items.forEach(item => {
@@ -24,8 +24,9 @@ export function displayContents(owner:string){
         console.log(itemString(item));
       }
     });
+    callback();
+  });
 
-  })
 }
 
 export function createItem(item: Inventory){

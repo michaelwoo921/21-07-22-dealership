@@ -28,7 +28,8 @@ async getItemsForDisplay(): Promise<Inventory[]>{
       '#owner': 'owner',
       '#car_id': 'car_id',
       '#make': 'make',
-      '#model': 'model'
+      '#model': 'model',
+      '#price': 'price'
     }
   };
 

@@ -139,7 +139,7 @@ function populateUserTable(){
 function populateDealershipTable(){
   addItem({owner: 'Cindy', car_id: 3, make: 'Kia', model: 'Forte', price: 12000});
   addItem({owner: 'David', car_id: 2, make: 'Kia', model: 'Soul', price: 16000});
-  addItem({owner: 'dealer', car_id: 1, make: 'Kia', model: 'Forte', price: 25000, stock: 5});
+  addItem({owner: 'dealer', car_id: 1, make: 'Kia', model: 'Rio', price: 25000, stock: 5});
   addItem({owner: 'dealer', car_id: 2, make: 'Kia', model: 'Soul', price: 16000, stock: 10});
   
 }
