@@ -9,7 +9,7 @@ class InventoryService {
     this.doc = docClient;
   }
 
-  async getItems(){
+  async getItems(): Promise<Inventory[]>{
     const params = {
       TableName: "dealership"
     };
@@ -17,13 +17,28 @@ class InventoryService {
     return await this.doc.scan(params).promise().then(data => {
         return data.Items as Inventory[];                                                                              
 
-  }).catch(error => {
-    logger.error(error);
-    return [];
   })
 }
 
-async getItemByKeys(owner:string, car_id: number){
+async getItemsForDisplay(): Promise<Inventory[]>{
+  const params = {
+    TableName: "dealership",
+    ProjectionExpression: '#owner, #car_id, #make, #model, #price',
+    ExpressionAttributeNames: {
+      '#owner': 'owner',
+      '#car_id': 'car_id',
+      '#make': 'make',
+      '#model': 'model'
+    }
+  };
+
+  return await this.doc.scan(params).promise().then(data => {
+      return data.Items as Inventory[];                                                                              
+})
+}
+
+
+async getItemByKeys(owner:string, car_id: number) : Promise<Inventory| null>{
   const params ={
     TableName: 'dealership',
     Key: {
@@ -37,7 +52,7 @@ async getItemByKeys(owner:string, car_id: number){
   }).catch(err => null);
 }
 
-async addItem(inventory: Inventory){
+async addItem(inventory: Inventory): Promise<boolean>{
   const params ={
     TableName: 'dealership',
     Item: inventory,
@@ -62,7 +77,7 @@ async addItem(inventory: Inventory){
   })
 }
 
-async updateItem(inventory: Inventory){
+async updateItem(inventory: Inventory): Promise<boolean>{
   const params ={
     TableName: 'dealership',
     Key: {

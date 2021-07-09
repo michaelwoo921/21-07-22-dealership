@@ -1,5 +1,6 @@
 import fs from 'fs';
 import logger from '../log';
+import inventoryService from './inventory.service';
 
 export interface Inventory {
 
@@ -11,16 +12,29 @@ export interface Inventory {
   stock?: number;
 }
 
+export function itemString(item: Inventory){
+  return item.car_id +'. ' + item.make + ' ' + item.model + '-$' + item.price;
+}
 
-export let inventory: Inventory;
+export function displayContents(owner:string){
+  logger.trace('displayContents called!');
+  inventoryService.getItemsForDisplay().then(items => {
+    items.forEach(item => {
+      if(item.owner === owner){
+        console.log(itemString(item));
+      }
+    });
 
-export function loadInventory(){
-  fs.readFile('inventory.json', 'utf8' , (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-   inventory = JSON.parse(data);
-   logger.debug('inventory: ',inventory);
+  })
+}
+
+export function createItem(item: Inventory){
+  inventoryService.addItem(item).then(res => {
+    logger.trace(res);
+
+  }).catch(err => {
+    
+    logger.error(err);
+
   })
 }

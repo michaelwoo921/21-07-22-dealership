@@ -8,7 +8,7 @@ class UserService {
     this.doc = dynamo;
   }
 
-  async getUserByName(name: string){
+  async getUserByName(name: string): Promise<User| null>{
     const params ={
       TableName: "users",
       Key: {
@@ -24,7 +24,7 @@ class UserService {
       else {
         return null;
       }
-    })
+    }).catch(err => null)
   }
 
 async addUser(user: User): Promise<boolean> {
@@ -48,7 +48,7 @@ return await this.doc.put(params).promise().then(result => {
   return false;
 })
 }
-async updateUser(user: User){
+async updateUser(user: User): Promise<boolean>{
   const params = {
     TableName: 'users',
     Key:{
