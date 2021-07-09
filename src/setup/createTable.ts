@@ -1,16 +1,25 @@
 import * as AWS from 'aws-sdk';
 import docClient from '../dynamo/dynamo';
 import logger from '../log';
-import {User} from '../user/user.service';
-import { Inventory} from '../inventory/inventory';
+
 
 
 AWS.config.update({region: "us-west-2"});
 
 const dynamodb = new AWS.DynamoDB();
 
-
-
+class User {
+  constructor(name:string, password: string, role: string, money: number){
+}
+}
+interface Inventory {
+  owner: string;
+  car_id: number;
+  make: string;
+  model: string;
+  price: number;
+  stock?: number;
+}
 
 function deleteDealershipTable(callback: Function){
   const removeDealershipSchema ={
