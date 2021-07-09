@@ -2,6 +2,15 @@ import fs from 'fs';
 import logger from '../log';
 import inventoryService from './inventory.service';
 
+export interface Payment_Info {
+  price: number,
+  downpayment: number;
+  loan: number;
+  monthly_payment: number;
+  payment_made: number;
+  mon_financing: number;
+  car_id: number;
+}
 export interface Inventory {
 
   owner: string;
@@ -10,6 +19,7 @@ export interface Inventory {
   model: string;
   price: number;
   stock?: number;
+  payment_info?: Payment_Info;
 }
 
 export function itemString(item: Inventory){
@@ -37,5 +47,26 @@ export function createItem(item: Inventory){
     
     logger.error(err);
 
+  })
+}
+
+export function updateItem(item: Inventory, callback: Function) {
+  logger.trace(`update called with parameter ${JSON.stringify(item)}`);
+  inventoryService.updateItem(item).then((bool)=>{
+      callback();
+  });
+}
+
+export function getByKeys(owner: string, car_id: number, success: Function, cont: Function, operation?:Function) {
+  inventoryService.getItemByKeys(owner, car_id).then((selection) => {
+      if (selection) {
+          if(operation) {
+              operation(selection);
+          }
+          success(selection as Inventory, cont);
+      } else {
+          console.log('Incorrect, try again.');
+          cont();
+      }
   })
 }
