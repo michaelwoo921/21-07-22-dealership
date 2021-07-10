@@ -7,9 +7,8 @@ export interface Payment_Info {
   downpayment: number;
   loan: number;
   monthly_payment: number;
-  payment_made: number;
+  payments_made: number;
   mon_financing: number;
-  car_id: number;
 }
 export interface Inventory {
 
@@ -39,34 +38,48 @@ export function displayContents(owner:string, callback: Function){
 
 }
 
-export function createItem(item: Inventory){
+export function createItem(item: Inventory, callback?:Function){
   inventoryService.addItem(item).then(res => {
     logger.trace(res);
-
+    if(callback){
+      callback();
+    }
   }).catch(err => {
     
     logger.error(err);
-
+    if(callback){
+      callback();
+    }
   })
 }
 
-export function updateItem(item: Inventory, callback: Function) {
+export function updateItem(item: Inventory, success: Function) {
   logger.trace(`update called with parameter ${JSON.stringify(item)}`);
   inventoryService.updateItem(item).then((bool)=>{
-      callback();
+      success();
   });
 }
 
-export function getByKeys(owner: string, car_id: number, success: Function, cont: Function, operation?:Function) {
+export function getByKeys(owner: string, car_id: number, callback: Function) {
   inventoryService.getItemByKeys(owner, car_id).then((selection) => {
-      if (selection) {
-          if(operation) {
-              operation(selection);
-          }
-          success(selection as Inventory, cont);
-      } else {
-          console.log('Incorrect, try again.');
-          cont();
-      }
+    callback(selection);
   })
+}
+
+export function displayPayments(owner: string, callback: Function) {
+  logger.trace('displayPayments called!');
+  inventoryService.getItemsForDisplay().then((items)=>{
+      items.forEach((item: any) => {
+          if(item.owner === owner){
+              let {payments_made, monthly_payment, mon_financing} = item.payment_info;
+              console.log(`${item.make}- ${item.model} : made  ${payments_made} payments 
+  of the amount of $${monthly_payment} for ${mon_financing} months
+              `);
+          }
+
+          });
+          
+          callback();
+  }).catch(()=>{console.log('error'); callback()});
+
 }

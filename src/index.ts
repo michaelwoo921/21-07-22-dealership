@@ -5,14 +5,14 @@ import { start } from './input';
 
 dotenv.config()
 
-if (process.env.ENVIRONMENT === 'prod'){
-  logger.level === 'WARN';
-} else {
-  logger.level === 'ALL';
 
+if (process.env.ENVIRONMENT === 'prod') {
+  logger.level = 'WARN';
+} else {
+  logger.level = 'ALL';
 }
 
 logger.debug(process.env.ENVIRONMENT);
-logger.debug("begining program in dev environment");
+logger.trace('Beginning program in dev environment');
 
 start();

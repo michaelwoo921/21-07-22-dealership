@@ -3,7 +3,7 @@ import userService from "./user.service";
 
 export class User {
   public role: string = 'Customer';
-  constructor(public name:string, public password: string, public money: number, role?: string){
+  constructor(public name:string, public password: string, public money?: number, role?: string){
     if (role) {
       this.role = role;
     }

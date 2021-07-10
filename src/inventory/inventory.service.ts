@@ -23,13 +23,14 @@ class InventoryService {
 async getItemsForDisplay(): Promise<Inventory[]>{
   const params = {
     TableName: "dealership",
-    ProjectionExpression: '#owner, #car_id, #make, #model, #price',
+    ProjectionExpression: '#owner, #car_id, #make, #model, #price, #payment_info',
     ExpressionAttributeNames: {
       '#owner': 'owner',
       '#car_id': 'car_id',
       '#make': 'make',
       '#model': 'model',
-      '#price': 'price'
+      '#price': 'price',
+      '#payment_info': 'payment_info'
     }
   };
 
@@ -62,7 +63,7 @@ async addItem(inventory: Inventory): Promise<boolean>{
       '#c_id': 'car_id',
       '#o': 'owner'
     },
-    ExpressAttributeNames: {
+    ExpressionAttributeValues: {
       ':car_id': inventory.car_id,
       ':owner': inventory.owner
     }
@@ -86,7 +87,7 @@ async updateItem(inventory: Inventory): Promise<boolean>{
       'car_id': inventory.car_id
     },
     UpdateExpression: 'set stock = :s, price = :p',
-    ExpressAttributeValues: {
+    ExpressionAttributeValues: {
       ':p' : inventory.price,
       ':s': inventory.stock
     },
