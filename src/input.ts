@@ -71,6 +71,7 @@ function mainFunc(ans: string){
     case '6':
       logger.trace('accept/reject offer');
       checkEmployee(processOffer);
+      break;
     case '7':
       logger.info('restock/remove');
       checkEmployee(restock);
@@ -316,6 +317,10 @@ function processOffer(){
   printOffers();
   rl.question(`Which offer do you accept? (id) `, id => {
     // sanitize id
+
+    if(offers.length==0){
+      start();
+    }
     selected = acceptOffer(Number(id));
     logger.debug(selected);
     logger.debug(offers);
