@@ -30,15 +30,18 @@ The Car Dealership App is a console-based application that facilitates the purch
 
 ### Selected ScreenShots
 
-A
 To use the app first setup DynamoDB table:
+
 ![Setup](/ScreenShots/setup.png 'Setup')
 
 register or login:
+
 ![Login](/ScreenShots/login.png 'Login')
 
 Making an offer as a Customer:
+
 ![Make an Offer](/ScreenShots/offer.png 'Make an Offer')
 
 Accept or Reject an Offer as an Employee:
+
 ![Accept an Offer](/ScreenShots/accept.png 'Process an Offer')
