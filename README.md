@@ -23,10 +23,10 @@ The Car Dealership App is a console-based application that facilitates the purch
 ## Getting Started
 
 - requirement: AWS account with DynamoDB full access policy attached to IAM
-  `git clone https://github.com/michaelwoo921/21-07-22-dealership.git`
-  `npm install` in project folder then
-  `npm run setup` for DynamoDB table setup
-  `npm start`
+- `git clone https://github.com/michaelwoo921/21-07-22-dealership.git`
+- `npm install` in project folder then
+- `npm run setup` for DynamoDB table setup
+- `npm start`
 
 ### Selected ScreenShots
 
