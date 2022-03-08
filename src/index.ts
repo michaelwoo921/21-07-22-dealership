@@ -1,10 +1,8 @@
-import userService from './user/user.service';
 import logger from './log';
 import dotenv from 'dotenv';
 import { start } from './input';
 
-dotenv.config()
-
+dotenv.config();
 
 if (process.env.ENVIRONMENT === 'prod') {
   logger.level = 'WARN';
